@@ -11,7 +11,7 @@ def format_stock_list(response):
     
     for entry in response["aaData"]:
         stock_name = entry[1].split(">")[1][:-3] # Remove the HTML tags
-        stock = { "name" : stock_name,
+        stock = { "name" : stock_name.upper(),
                   "isin" : entry[2],
                   "symbol" : entry[3] }
         formatted_response["stocks"].append(stock)

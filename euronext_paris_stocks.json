@@ -14,7 +14,7 @@
         {
             "name": "ABC ARBITRAGE",
             "isin": "FR0004040608",
-            "symbol": "ABCA" 
+            "symbol": "ABCA"
         },
         {
             "name": "ABEO",
@@ -32,7 +32,7 @@
             "symbol": "ABVX"
         },
         {
-            "name": "ABL Diagnostics",
+            "name": "ABL DIAGNOSTICS",
             "isin": "FR001400AHX6",
             "symbol": "ABLD"
         },
@@ -1087,7 +1087,7 @@
             "symbol": "HCO"
         },
         {
-            "name": "Holcim Ltd",
+            "name": "HOLCIM LTD",
             "isin": "CH0012214059",
             "symbol": "HOLN"
         },
@@ -1962,7 +1962,7 @@
             "symbol": "TTE"
         },
         {
-            "name": "TotalEnergiesGabon",
+            "name": "TOTALENERGIESGABON",
             "isin": "GA0000121459",
             "symbol": "EC"
         },
