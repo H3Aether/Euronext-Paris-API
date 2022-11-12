@@ -26,3 +26,17 @@ def get_stock_from_name(name):
             if stock["name"].upper() == name.upper():
                 return stock
         raise ValueError("was not found")
+
+def get_stock(search):
+    """ Search a stock from the name, symbol or isin """
+    try:
+        stock = get_stock_from_name(search)
+    except ValueError:
+        try:
+            stock = get_stock_from_symbol(search)
+        except ValueError:
+            try:
+                stock = get_stock_from_isin(search)
+            except ValueError as ve:
+                raise ValueError(f"[ERROR] {search.upper()} was not found")
+    return stock
