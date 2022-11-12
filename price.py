@@ -1,5 +1,6 @@
 from stock_info import *
 from requests_html import HTMLSession
+import requests
 
 session = HTMLSession()
 
@@ -65,6 +66,14 @@ def get_stock_details(stock):
     return stock_details
 
 
+def get_stock_details_fast(stock):
+    stock_url = f"https://live.euronext.com/intraday_chart/getChartData/{stock['isin']}-XPAR/intraday"
+    r = requests.get(stock_url)
+    data = r.json()
+    print(data)
+    
+
+
 if __name__ == "__main__":
     search = "stm"
     
@@ -80,5 +89,5 @@ if __name__ == "__main__":
                 print(search.upper() + " " + str(ve))
                 exit()
     
-    stock_details = get_stock_details(stock)
-    print(stock_details)
+    stock_details = get_stock_details_fast(stock)
+    
