@@ -27,8 +27,7 @@ def get():
         filter = json.load(f)
         r = requests.post(URL, data=filter)
 
-    # The response is the list of all the stocks
-    # Save the response to a file in utf-8 encoding
+    # The response r is the list of all the stocks
     response = r.json()
     response = format_stock_list(response)
 
