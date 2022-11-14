@@ -12,7 +12,7 @@ def format_stock_list(response):
     
     for entry in response["aaData"]:
         stock_name = entry[1].split(">")[1][:-3] # Remove the HTML tags
-        stock_market = entry[1].split("-")[1][:4] # The mark is in the url, after the dash. It is always 4 characters long
+        stock_market = entry[1].split("-")[1][:4] # The market is in the url, after the dash. It is always 4 characters long
         company = { "name" : stock_name.upper(),
                   "isin" : entry[2],
                   "symbol" : entry[3],
@@ -31,8 +31,5 @@ def get():
     # Save the response to a file in utf-8 encoding
     response = r.json()
     response = format_stock_list(response)
-    
-    # with open("euronext_paris_stocks.json", "w", encoding="utf-8") as f:
-    #     json.dump(response, f)
 
     return response
