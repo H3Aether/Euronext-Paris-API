@@ -3,10 +3,10 @@ from bs4 import BeautifulSoup
 
 def get(isin, market):
     try:
-        url = f"https://live.euronext.com/intraday_chart/getChartData/{isin}-{market}/intraday" # Create the URL using the isin, assuming XPAR as the market
+        url = f"https://live.euronext.com/intraday_chart/getChartData/{isin}-{market}/intraday" # Create the URL using the isin
         r = requests.get(url).json()[-1] # Gets the list of recent infos and extract the last one
     except: # If it fails, raise an exception
-        raise Exception(f"[ERROR] Could not get the stock details for {isin} on market {market}")
+        raise Exception(f"Could not get the stock details for {isin} on market {market}")
         
 
     price = float(r['price']) # Get the price and convert it to float
@@ -20,7 +20,6 @@ def get(isin, market):
 
     # Gathering the data from the table
     rows = soup.find_all('tr') # Get all the <tr> rows in an array
-
     currency = rows[0].find_all('td')[1].text.replace("\n", "").replace("\t", "").replace(" ", "")
     volume = int(rows[1].find_all('td')[1].text.replace(",", ""))
     volume_date = rows[1].find_all('td')[2].text[1:-1]
@@ -36,7 +35,7 @@ def get(isin, market):
     previous_close = float(rows[9].find_all('td')[1].text.replace(",", ""))
     previous_close_date = rows[9].find_all('td')[2].text[1:-1]
     week_52 = [ float(rows[10].find_all('td')[1].find_all('span')[0].text.replace(",", "")), float(rows[10].find_all('td')[1].find_all('span')[1].text.replace(",", "")) ]
-    market_cap = rows[11].find_all('td')[1].text.replace[1:-1]
+    market_cap = rows[11].find_all('td')[1].text[1:-1]
 
     # Creating the dictionary
     stock_details = {   "price" : price,
@@ -55,3 +54,16 @@ def get(isin, market):
                         "update_date" : update_date }
 
     return stock_details
+
+
+
+def getChart(isin, market, period):
+    """ Gets the chart data for a stock, on a given period.
+    Period can either be intraday or max. """
+    try:
+        url = f"https://live.euronext.com/intraday_chart/getChartData/{isin}-{market}/{period}" # Create the URL using the isin, market, and period
+        r = requests.get(url).json() # Gets the list of recent infos and extract the last one
+    except: # If it fails, raise an exception
+        raise Exception(f"Could not get the stock details for {isin} on market {market} for the period {period}")
+    
+    return r
